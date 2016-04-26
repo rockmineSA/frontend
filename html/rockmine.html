@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ROCKMINE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+    
+
+      </script>
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <style type="text/css">
+      body {
+	padding-top: 100px;
+	padding-bottom: 0px;
+	background-color: #000000;
+	font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+	color: white;
+      }
+	  
+	h3
+	  {
+	  	font-family: 'Source Sans Pro', sans-serif;
+	    font-size: 20px;
+		letter-spacing: 2px;
+		color: white;
+	  }
+	  
+  	h2
+  	  {
+  	  	font-family: 'Source Sans Pro', sans-serif;
+  	    font-size: 18px;
+  		letter-spacing: 2px;
+  		color: blue;
+	}
+	  
+	  a:link{
+		  color: white;
+	  }
+	  
+	  a:visited{
+		  color: white;
+	  }
+	  
+	  
+	  #container {
+	  	position:relative;
+	  	width:100%;
+	  	height:600px;
+	  	margin:0 auto;
+	  	background-color:#000;
+	  }
+	  #box {
+	      float: right;
+	      position: relative;
+	      width: 30%;
+	      height: 300px;
+		  border:1px;
+	      display: inline-block;
+	  }
+	  #left {
+	      position: fixed;
+	      width: 70%;
+	      height: 300px;
+	      right: 0px;
+	      left: 0px;
+	      display: inline-block;
+	      float: left;
+		  
+	  }
+	  #guiFrame {
+		  width: 100%;
+		
+	  }
+	  .dataSet {
+	      border: 3px solid white;
+	      margin: 3px;
+		  width: 90%;
+	  }
+	  .dataSet td
+	  {
+	      padding: 5px 10px 5px 10px;
+	  }
+	  
+      .selmenu {
+        width: 17%;
+        margin-top: 30px;
+      }
+	  
+	  </style>
+	  
+
+
+   
+
+
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+            
+			                       <link rel="shortcut icon" href="../assets/ico/favicon.png">
+								   
+							       <!-- Le javascript
+							       ================================================== -->
+							       <!-- Placed at the end of the document so the pages load faster -->
+							       <script src="js/jquery.js"></script>
+							       <script src="js/bootstrap-transition.js"></script>
+							       <script src="js/bootstrap-alert.js"></script>
+							       <script src="js/bootstrap-modal.js"></script>
+							       <script src="js/bootstrap-dropdown.js"></script>
+							       <script src="js/bootstrap-scrollspy.js"></script>
+							       <script src="js/bootstrap-tab.js"></script>
+							       <script src="js/bootstrap-tooltip.js"></script>
+							       <script src="js/bootstrap-popover.js"></script>
+							       <script src="js/bootstrap-button.js"></script>
+							       <script src="js/bootstrap-collapse.js"></script>
+							       <script src="js/bootstrap-carousel.js"></script>
+							       <script src="js/bootstrap-typeahead.js"></script>
+	
+	
+							   	  <script>
+							   	  $(document).ready(function(){
+
+							   		var url = "http://ec2-54-191-195-51.us-west-2.compute.amazonaws.com:8392/api/rockmine/asteroid?limit=25";
+	
+							        $("#compound").change(function(){
+							            resetTotalIframe2();
+							          });
+		  
+									  $("#pwr").change(function(){
+										resetTotalIframe2();
+							          });
+									  
+									  
+									  resetTotalIframe2 = function() {
+										  
+	  							   	    $.get(url, function(data, status){
+											$('#asteroids tbody').remove();
+	  							   			for(var index in data){
+	  							   				var recordData = data[index];
+			
+	  							   				var tData='<tr><td>'+
+	  							   								 '<table class="dataSet">'
+	  							   				                    + '<tr><td><h3><a onClick="javascript:reloadAstroIframe(\''+ recordData.id+'\');">' + recordData.full_name +'</a></h3></td><td><h2>$' + Math.round(recordData.diameter * 100)/100+'  B</h2></td></tr>' +
+	  							   				           '<tr><td> Period(days):</td><td>' + Math.round(recordData.per * 100)/100 + ' </td></tr><tr><td>Distance (AU): </td><td>' + recordData.a + '<tr><td> Diameter:</td><td>' + recordData.diameter + '</td></tr><tr><td>Spectral Class: </td><td>' + recordData.spec_b + '<tr><td> Delta V (Km/s):</td><td>' + recordData.diameter + '</td>'
+				
+				
+				
+	  							                               '</td></tr>' +
+	  							                            '</table>' +
+	  							   				'</td></tr>';
+	  							   			$('#asteroids').last().append(tData);
+	  							   			}
+	  							   	    });
+                       							$("#guiFrame").attr('src','http://ec2-52-33-141-124.us-west-2.compute.amazonaws.com/?a=8');
+$("#guiFrame").contentWindow.location.reload(true);
+									  	
+									  }
+									  
+									  
+							   		reloadAstroIframe = function(id) {
+							   			$("#guiFrame").attr('src','http://ec2-52-33-141-124.us-west-2.compute.amazonaws.com/?a=8&selectedId=' + id);
+							   			$("#guiFrame").contentWindow.location.reload(true);	
+							   		};
+		
+									
+									$("#resetIframe").click(function(){
+										resetTotalIframe();
+									});
+									
+									function resetTotalIframe() {
+				   			                       							$("#guiFrame").attr('src','http://ec2-52-33-141-124.us-west-2.compute.amazonaws.com/?a=8');
+				   			$("#guiFrame").contentWindow.location.reload(true);
+									}
+							   	    $.get(url, function(data, status){
+	
+		
+							   			for(var index in data){
+							   				var recordData = data[index];
+			
+							   				var tData='<tr><td>'+
+							   								 '<table class="dataSet">'
+							   				                    + '<tr><td><h3><a onClick="javascript:reloadAstroIframe(\''+ recordData.id+'\');">' + recordData.full_name +'</a></h3></td><td><h2>$' +recordData.diameter+'  B</h2></td></tr>' +
+							   				           '<tr><td> Period(days):</td><td>' + Math.round(recordData.per * 100)/100 + ' </td></tr><tr><td>Distance (AU): </td><td>' + Math.round(recordData.a*100)/100 + '<tr><td> Diameter:</td><td>' + recordData.diameter + '</td></tr><tr><td>Spectral Class: </td><td>' + recordData.spec_b + '<tr><td> Delta V (Km/s):</td><td>' + recordData.diameter + '</td>'
+				
+				
+				
+							                               '</td></tr>' +
+							                            '</table>' +
+							   				'</td></tr>';
+							   			$('#asteroids').last().append(tData);
+							   			}
+							   	    });
+							   	   // jQuery methods go here...
+
+							   	});
+							   	  </script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#"><img src="ROCKMINE_LOGO2.png" width="80%"></a>
+          <!--<div class="nav-collapse collapse">
+            <ul class="nav navbar-nav">
+              <!--<li><form class="navbar-form pull-right">
+                <input class="span1" type="text" placeholder="Launch Year">
+              </form>
+              </li>
+              <li><form class="navbar-form pull-right">
+                <input class="span1" type="text" placeholder="Return Year">
+              </form>
+              </li>  -->
+          
+
+            <form role="form" class="nav navbar-search" action="handler.php" method="get">
+            
+              <input id="return" class="span1 selmenu" type="text" placeholder="Return Year" name="textbox">
+            
+             
+              <select id="compound" class="selmenu" name="url1">
+              <option value="none.html">Compounds</option>
+              <option value="platinum.html">Platinum</option>
+              <option value="nickel.html">Nickel</option>
+              <option value="iron.html">Iron</option>
+              <option value="sodium.html">Sodium</option>
+              <option value="calcium.html">Calcium</option>
+              <option value="aluminum.html">Aluminum</option>
+              <option value="cobalt.html">Cobalt</option>
+              <option value="water.html">Water</option>
+              <option value="nitrogen.html">Nitrogen</option>
+              <option value="hydrogen.html">Hydrogen</option>
+              <option value="ammonia.html">Ammonia</option>
+              <option value="magnesium.html">Magnesium</option>
+              <option value="iridium.html">Iridium</option>
+              <option value="manganese.html">Manganese</option>
+              <option value="silicon.html">Silicon</option>
+              <option value="oxygen.html">Oxygen</option>
+              <option value="phosphorus.html">Phosphorus</option>
+              <option value="zinc.html">Zinc</option>
+              <option value="scandium.html">Scandium</option>
+              <option value="sulfur.html">Sulfur</option>
+              <option value="carbon.html">Carbon</option>
+              <option value="potassium.html">Potassium</option>
+              </select>
+            
+            
+              <select id="pwr" class="selmenu" name="url2">
+              <option value="none.html">Mission Duration</option>
+              <option value="1">1 Year</option>
+			  <option value="1">5 Years</option>
+			  <option value="1">10 Years</option>
+			  <option value="1">15 Years</option>
+			  <option value="1">20 Years</option>
+			  
+              </select>
+			  <input class="btn" type="button" id="resetIframe"  class="selmenu" style ="margin-top:20px;" value="Reset"/>
+            
+              <!--
+              <select id="limit" class="selmenu" name="url3">
+              <option value="none.html">Limit</option>
+              <option value="page2.html">Page 2</option>
+              </select>
+              
+              <select id="offset" class="selmenu" name="url4">
+              <option value="none.html">Offset</option>
+              <option value="page2.html">Page 2</option>
+              </select>
+
+              <select id="selId" class="selmenu" name="url5">
+              <option value="none.html">selectedId</option>
+              <option value="page2.html">Page 2</option>
+              </select>
+              -->
+            </form>
+              <!--
+              <input type="submit" />
+              </form>
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><input class="checkbox" type="checkbox" name="element" value="Iron">Iron</li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+              <button type="submit" class="btn">Find Asteroid</button>
+            </form> -->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div><!-- /container -->
+
+
+
+<div id="container">
+	<div id="left">
+<iframe id="guiFrame" src="http://ec2-52-33-141-124.us-west-2.compute.amazonaws.com/?astroQuery=asdasd" frameborder="0" style="height: 85vh;">
+</iframe>
+</div>
+
+
+		<div id="box">
+			<table id="asteroids">
+				<tr></tr>
+			</table>
+		</div>
+	</div>
+	
+</body>
+</html>
+
+  </body>
+</html>
+ 
